@@ -11,7 +11,8 @@
     <header class="bg-primary text-white py-5">
         <div class="container">
             <h1>Bienvenue sur ma Librairie PHP</h1>
-            <p>Un framework léger pour vous aider à construire vos projets web</p>
+            <p>Un framework léger pour vous aider à construire vos projets web.</p>
+            <p class="lead">Cette bibliothèque est conçue pour simplifier le développement d'applications PHP en fournissant des outils puissants, mais faciles à utiliser.</p>
         </div>
     </header>
 
@@ -23,15 +24,22 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Routing simple</h3>
-                            <p class="card-text">Définissez des routes et associez-les à des contrôleurs et actions.</p>
+                            <p class="card-text">Définissez des routes et associez-les à des contrôleurs et actions. Le routing est flexible et permet d'ajouter facilement des paramètres dynamiques dans l'URL.</p>
+                            <p>Les routes peuvent être définies avec la méthode <code>register</code> dans le framework.</p>
+                            <a href="#usage" class="btn btn-primary">Voir comment l'utiliser</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Vues avec Twig</h3>
-                            <p class="card-text">Utilisez Twig pour rendre vos pages dynamiques avec des templates.</p>
+                            <h3 class="card-title">Vues dynamiques avec Twig</h3>
+                            <p class="card-text">Utilisez Twig pour rendre vos pages dynamiques avec des templates puissants et sécurisés. Voici comment vous pouvez afficher des pages avec des données dynamiques :</p>
+                          
+                                <a href="/blog" class="btn btn-outline-primary mb-2">Voir le Blog</a>
+                                <a href="/article" class="btn btn-outline-primary mb-2">Voir un Article</a>
+                                <a href="/accueil" class="btn btn-outline-primary mb-2">Accueil</a>
+                           
                         </div>
                     </div>
                 </div>
@@ -39,7 +47,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Gestion des erreurs</h3>
-                            <p class="card-text">Des messages d'erreur simples, comme une page 404, en cas de route non trouvée.</p>
+                            <p class="card-text">Affiche des messages d'erreur simples et personnalisables, comme une page 404, en cas de route non trouvée.</p>
+                            <p>Si vous accédez à une page inexistante, vous serez redirigé vers une page 404.</p>
+                            <a href="/page-inexistante" class="btn btn-danger">Page inexistante (404)</a>
                         </div>
                     </div>
                 </div>
@@ -57,20 +67,21 @@ $router = new SimpleRouter($renderer);
 <span style="color:red;">2/ Enregistrer les routes ! </span>
 $router->register('/', [HomeController::class, 'index']);
 $router->register('/contact', [ContactController::class, 'index']);
-$router->register('/accueil', [AccueilController::class, 'index']);
-$router->register('/article', [ArticleController::class, 'show']);
+$router->register('/article/{id}', [ArticleController::class, 'show']);
 $router->register('/blog', [BlogController::class, 'index']);
 <span style="color:red;">3/ Récupérer l'URL de la requête </span>
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-<span style="color:red;">4/Déclencher le dispatch de la route !</span>
+<span style="color:red;">4/ Déclencher le dispatch de la route !</span>
 $router->dispatch($requestUri);
             </code></pre>
+            <p>Ce code crée un simple routeur, enregistre des routes et déclenche le dispatch pour afficher la bonne vue. Vous pouvez ajouter autant de routes que nécessaire et les associer à des contrôleurs et actions spécifiques.</p>
         </div>
     </section>
 
     <footer class="bg-dark text-white py-3">
         <div class="container">
             <p>&copy; 2024 Ma Librairie PHP | Crée par Le groupe North</p>
+            <p><a href="#features" class="text-white">Retour aux fonctionnalités</a></p>
         </div>
     </footer>
 
