@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Librairie PHP</title>
+    <!-- Ajouter Bootstrap via CDN sans l'attribut integrity -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="bg-primary text-white py-5">
+        <div class="container">
+            <h1>Bienvenue sur ma Librairie PHP</h1>
+            <p>Un framework léger pour vous aider à construire vos projets web</p>
+        </div>
+    </header>
+
+    <section id="features" class="my-5">
+        <div class="container">
+            <h2 class="mb-4">Fonctionnalités principales</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Routing simple</h3>
+                            <p class="card-text">Définissez des routes et associez-les à des contrôleurs et actions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Vues avec Twig</h3>
+                            <p class="card-text">Utilisez Twig pour rendre vos pages dynamiques avec des templates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Gestion des erreurs</h3>
+                            <p class="card-text">Des messages d'erreur simples, comme une page 404, en cas de route non trouvée.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="my-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4">Comment l'utiliser ?</h2>
+            <p>Voici un exemple simple d'intégration de la librairie :</p>
+            <pre><code>
+<span style="color:red;">1/ Créer le routeur et passer l'objet Renderer</span>
+$router = new SimpleRouter($renderer);
+<span style="color:red;">2/ Enregistrer les routes ! </span>
+$router->register('/', [HomeController::class, 'index']);
+<span style="color:red;">3/ Récupérer l'URL de la requête </span>
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+<span style="color:red;">4/Déclencher le dispatch de la route !</span>
+$router->dispatch($requestUri);
+            </code></pre>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-3">
+        <div class="container">
+            <p>&copy; 2024 Ma Librairie PHP | Crée par Le groupe North</p>
+        </div>
+    </footer>
+
+    <!-- Ajouter le script Bootstrap JS sans l'attribut integrity -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

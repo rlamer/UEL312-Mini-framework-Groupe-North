@@ -2,46 +2,52 @@
 
 namespace Framework312\Router;
 
-use Framework312\Router\Exception as RouterException;
 use Framework312\Template\Renderer;
-use Symfony\Component\HttpFoundation\Response;
 
-class Route {
-    private const VIEW_CLASS = 'Framework312\Router\View\BaseView';
-    private const VIEW_USE_TEMPLATE_FUNC = 'use_template';
-    private const VIEW_RENDER_FUNC = 'render';
 
-    private string $view;
+class SimpleRouter implements Router
+{
+    private array $routes = [];
 
-    public function __construct(string|object $class_or_view) {
-        $reflect = new \ReflectionClass($class_or_view);
-        $view = $reflect->getName();
-        if (!$reflect->isSubclassOf(self::VIEW_CLASS)) {
-            throw new RouterException\InvalidViewImplementation($view);
+    // Le constructeur prend un objet Renderer pour rendre les vues Twig
+    public function __construct(private Renderer $renderer)
+    {
+    }
+
+    // Enregistrer une route (GET, POST, etc.)
+    public function register(string $path, array $handler, string $method = 'GET'): void
+    {
+        // On enregistre la route dans un tableau multidimensionnel
+        $this->routes[strtoupper($method)][$path] = $handler;
+    }
+
+    // Dispatcher la requête en fonction du chemin et de la méthode
+    public function dispatch(string $uri): void
+    {
+        // On récupère la méthode de la requête HTTP (GET, POST, etc.)
+        $method = $_SERVER['REQUEST_METHOD'];
+        // On extrait le chemin de l'URL
+        $path = parse_url($uri, PHP_URL_PATH);
+
+        // Vérification si la route existe pour la méthode et le chemin
+        if (isset($this->routes[$method][$path])) {
+            // On récupère le contrôleur et l'action associés à cette route
+            $handler = $this->routes[$method][$path];
+            [$controller, $action] = $handler;
+
+            // On crée une instance du contrôleur et on exécute l'action
+            $controllerInstance = new $controller($this->renderer);
+            $controllerInstance->$action();
+        } else {
+            // Si la route n'existe pas, on appelle la méthode pour gérer l'erreur 404
+            $this->serve();
         }
-        $this->view = $view;
     }
 
-    public function call(Request $request, ?Renderer $engine): Response {
-	    // TODO
-    }
-}
-
-class SimpleRouter implements Router {
-    private Renderer $engine;
-
-    public function __construct(Renderer $engine) {
-        $this->engine = $engine;
-        // TODO
-    }
-
-    public function register(string $path, string|object $class_or_view) {
-	    // TODO
-    }
-
-    public function serve(mixed ...$args): void {
-	    // TODO
+    // Méthode pour gérer les erreurs 404
+    public function serve(): void
+    {
+        // On rend la page 404 via Twig (il faut avoir un template '404.twig')
+        echo $this->renderer->render('404.twig');
     }
 }
-
-?>
