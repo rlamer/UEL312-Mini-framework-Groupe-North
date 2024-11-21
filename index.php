@@ -2,7 +2,10 @@
 
 use Framework312\Router\SimpleRouter;
 use Framework312\Controller\HomeController;  // Ajout de l'importation de HomeController
-use Framework312\Controller\ContactController; // Cette ligne est importante
+use Framework312\Controller\ContactController; 
+use Framework312\Controller\AccueilController;
+use Framework312\Controller\BlogController;
+use Framework312\Controller\ArticleController;
 use Framework312\Template\Renderer;
 
 // index.php
@@ -21,7 +24,9 @@ $router = new SimpleRouter($renderer);
 $router->register('/', [HomeController::class, 'index']);
 $router->register('/index.php', [HomeController::class, 'index']);
 $router->register('/contact', [ContactController::class, 'index']);
-$router->register('/accueil', [HomeController::class, 'index']);
+$router->register('/accueil', [AccueilController::class, 'index']);
+$router->register('/article', [ArticleController::class, 'show']);
+$router->register('/blog', [BlogController::class, 'index']);
 
 
 // Récupère l'URI de la requête et nettoie pour ne pas inclure /index.php
