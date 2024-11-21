@@ -3,26 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Ma Librairie PHP</title>
+    <!-- Ajouter Bootstrap via CDN sans l'attribut integrity -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="bg-primary text-white py-5">
         <div class="container">
-            <h1>Bienvenue sur notre blog</h1>
+            <h1>Bienvenue sur ma Librairie PHP</h1>
+            <p>Un framework léger pour vous aider à construire vos projets web.</p>
         </div>
     </header>
-    <section class="container my-5">
-        <h2>Articles récents</h2>
-        <ul>
-            <li><a href="/article/1">Article 1</a></li>
-            <li><a href="/article/2">Article 2</a></li>
-        </ul>
+
+    <section id="blog" class="my-5">
+        <div class="container">
+            <h2 class="mb-4">Articles du Blog</h2>
+            <div class="row">
+                <!-- Article 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Image de l'article">
+                        <div class="card-body">
+                            <h3 class="card-title">Titre de l'article 1</h3>
+                            <p class="card-text">Voici un extrait de l'article 1. Ce texte est un aperçu pour attirer l'attention des lecteurs. Découvrez plus en lisant l'article complet.</p>
+                            <a href="#" class="btn btn-primary">Lire plus</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Article 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Image de l'article">
+                        <div class="card-body">
+                            <h3 class="card-title">Titre de l'article 2</h3>
+                            <p class="card-text">Voici un extrait de l'article 2. Un aperçu concis qui vous donnera envie de découvrir l'intégralité de l'article.</p>
+                            <a href="#" class="btn btn-primary">Lire plus</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Article 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Image de l'article">
+                        <div class="card-body">
+                            <h3 class="card-title">Titre de l'article 3</h3>
+                            <p class="card-text">Extrait de l'article 3, qui met en lumière les aspects importants du sujet traité. Pour en savoir plus, cliquez sur le lien ci-dessous.</p>
+                            <a href="#" class="btn btn-primary">Lire plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
     <footer class="bg-dark text-white py-3">
         <div class="container">
-            <p>&copy; 2024 MonSiteWeb</p>
+            <p>&copy; 2024 Ma Librairie PHP | Crée par Le groupe North</p>
         </div>
     </footer>
+
+    <!-- Ajouter le script Bootstrap JS sans l'attribut integrity -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
