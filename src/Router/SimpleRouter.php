@@ -30,29 +30,52 @@ class Route {
 
     //Call methods (get or post) in the view and return a response:
     public function call(Request $request, ?Renderer $engine): Response {
-	    // TODO
+        // Instantiate the view
+        $viewInstance = new $this->view();
+    
+        // Delegate the rendering to the view's render method
+        return $viewInstance->render($request);
     }
 }
 
 //Router has to register a path and to call a method of a relevant view
 class SimpleRouter implements Router {
-    //Renderer registers a tag (e.g. user, book...) and renders a template with appropriate data
     private Renderer $engine;
+
+    // Route registry: path => Route object
+    private array $routes = [];
 
     public function __construct(Renderer $engine) {
         $this->engine = $engine;
-        // TODO
     }
 
-
-    //Add new routes (e.g./book/:id) and define a view whose methods will be used to handle requests to this URL
-    public function register(string $path, string|object $class_or_view) {
-	    // TODO
+    // Add a new route
+    public function register(string $path, string|object $class_or_view): void {
+        $this->routes[$path] = new Route($class_or_view);
     }
 
-    //Check if the are matching routes, call the relavant view's method, return the response
+    // Handle incoming requests
     public function serve(mixed ...$args): void {
-	    // TODO
+        // Create a Request object (using your custom Request class)
+        $request = new Request(...$args);
+
+        // Extract the path from the request
+        $path = $request->getPathInfo();
+
+        // Match the path to a registered route
+        foreach ($this->routes as $routePath => $route) {
+            // Simple matching logic (you can enhance it with regex for dynamic routes)
+            if ($routePath === $path) {
+                // Call the route and get a response
+                $response = $route->call($request, $this->engine);
+                $response->send(); // Send the response to the client
+                return;
+            }
+        }
+
+        // If no route matches, return a 404 response
+        $response = new Response('404: Oops! Seems that there is no such route.', 404, ['Content-Type' => 'text/plain']);
+        $response->send();
     }
 }
 
