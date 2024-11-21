@@ -3,24 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page d'accueil</title>
+    <title>Ma Librairie PHP - Accueil</title>
+    <!-- Ajouter Bootstrap via CDN sans l'attribut integrity -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background-image: url('https://via.placeholder.com/1920x600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 60vh;
+        }
+
+        .feature-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
-    <header class="bg-primary text-white py-5">
-        <div class="container">
-            <h1>Bienvenue sur notre site web</h1>
-            <p>Voici la page d'accueil de notre site.</p>
+    <!-- Section Hero -->
+    <header class="hero-section d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-3 font-weight-bold">Bienvenue sur Ma Librairie PHP</h1>
+            <p class="lead mb-4">Un framework PHP simple et puissant pour vos projets web. Créez vos applications rapidement avec une structure claire et flexible.</p>
+            <a href="#features" class="btn btn-light btn-lg">Découvrir les fonctionnalités</a>
         </div>
     </header>
-    <section class="container my-5">
-        <h2>À propos de nous</h2>
-        <p>Nous développons un framework léger pour des projets web modernes.</p>
-    </section>
-    <footer class="bg-dark text-white py-3">
+
+    <!-- Fonctionnalités principales -->
+    <section id="features" class="my-5">
         <div class="container">
-            <p>&copy; 2024 MonSiteWeb</p>
+            <h2 class="text-center mb-5">Fonctionnalités principales</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Routing simple">
+                        <div class="card-body">
+                            <h5 class="card-title">Routing simple</h5>
+                            <p class="card-text">Définissez des routes claires et associez-les à des contrôleurs pour gérer la logique de votre application.</p>
+                            <a href="#usage" class="btn btn-primary">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Vues avec Twig">
+                        <div class="card-body">
+                            <h5 class="card-title">Vues avec Twig</h5>
+                            <p class="card-text">Utilisez Twig pour générer des vues dynamiques, réutilisables et maintenables dans vos projets PHP.</p>
+                            <a href="#usage" class="btn btn-primary">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Gestion des erreurs">
+                        <div class="card-body">
+                            <h5 class="card-title">Gestion des erreurs</h5>
+                            <p class="card-text">Gérez les erreurs efficacement, y compris les pages 404, avec des messages clairs et personnalisés.</p>
+                            <a href="#usage" class="btn btn-primary">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Comment l'utiliser -->
+    <section id="usage" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Comment l'utiliser ?</h2>
+            <p class="text-center mb-4">Découvrez comment intégrer la librairie dans vos projets avec un exemple simple d'utilisation :</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <pre><code>
+$router = new SimpleRouter($renderer);
+$router->register('/', [HomeController::class, 'index']);
+$router->register('/article', [ArticleController::class, 'show']);
+                    </code></pre>
+                    <p class="text-center">Pour plus d'exemples et des détails, consultez notre <a href="#">documentation complète</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Ma Librairie PHP | Créé par Le groupe North</p>
         </div>
     </footer>
+
+    <!-- Ajouter le script Bootstrap JS sans l'attribut integrity -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
