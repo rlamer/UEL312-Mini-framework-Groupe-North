@@ -38,11 +38,6 @@ abstract class BaseView {
     //Defines how the view generates a response.
     //Response is a Symfony HTTPFoundation class
     abstract public function render(Request $request): Response;
-    /*Example:
-    public function render(Request $request): Response {
-    return new Response('<h1>Hello, World!</h1>'); // Returns an HTML response.
-    }
-    */
 }
 
 ?>

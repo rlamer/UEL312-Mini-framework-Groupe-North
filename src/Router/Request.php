@@ -4,16 +4,6 @@ namespace Framework312\Router;
 
 use Symfony\Component\HttpFoundation\{Request as SymfonyRequest, InputBag};
 
-/**
- * Symfony HttpFoundation Request class replaces PHP global variables ($_GET, $_POST...) and functions like echo(), setcookie()...
- * The class is used to handle HTTP requests, for example:
- * Data in the URL: $request->query->get('id')
- * Data sent via POST: $request->request->get('name')
- * Files sent from a form: $request->files->get('file')
- * HTTP method: $request->server->get('REQUEST_METHOD')
- * etc
- * The class Request customizes the Symfony class by adding new features
- */
 class Request extends SymfonyRequest {
     //Store any additional information that is not part of the standard HTTP request (for example, user role)
     private array $context = [];
