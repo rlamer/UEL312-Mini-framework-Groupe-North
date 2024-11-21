@@ -5,48 +5,38 @@ declare(strict_types=1);
 namespace Framework312\Template;
 
 class SimpleRenderer implements Renderer {
-    private array $templatePaths = []; // Array to store template paths by tag
+    private string $baseTemplateDir; // Base directory for templates
+    private array $templatePaths = []; // Stores paths for registered tags
 
-    /**
-     * Renders a template with the given data.
-     *
-     * @param mixed $data Data to be used in the template.
-     * @param string $template The template file name (e.g., 'books.php').
-     * @return string The rendered template as a string.
-     */
+    public function __construct(string $baseTemplateDir) {
+        // Normalize and store the base directory
+        $this->baseTemplateDir = rtrim($baseTemplateDir, '/');
+    }
+
     public function render(mixed $data, string $template): string {
-        // Locate the template file
         $templateFile = $this->findTemplate($template);
         if (!$templateFile) {
             throw new \RuntimeException("Oops! Template '$template' not found.");
         }
 
-        // Extract data into variables
         if (is_array($data)) {
-            extract($data, EXTR_SKIP); // Prevent overwriting existing variables
+            extract($data, EXTR_SKIP);
         }
 
-        // Start output buffering
         ob_start();
         include $templateFile;
-        return ob_get_clean(); // Get the buffered content and clean the buffer
+        return ob_get_clean();
     }
 
-    /**
-     * Registers a new template tag.
-     *
-     * @param string $tag The tag/category for templates (e.g., 'books').
-     */
     public function register(string $tag): void {
-        $this->templatePaths[$tag] = __DIR__ . '/../../templates/' . $tag;
+        $tagPath = $this->baseTemplateDir . '/' . $tag;
+        if (!is_dir($tagPath)) {
+            throw new \RuntimeException("Template directory not found: $tagPath");
+        }
+
+        $this->templatePaths[$tag] = $tagPath;
     }
 
-    /**
-     * Finds the template file in registered paths.
-     *
-     * @param string $template The template file name.
-     * @return string|null The full path to the template, or null if not found.
-     */
     private function findTemplate(string $template): ?string {
         foreach ($this->templatePaths as $path) {
             $templateFile = "$path/$template";
@@ -54,6 +44,7 @@ class SimpleRenderer implements Renderer {
                 return $templateFile;
             }
         }
+
         return null;
     }
 }
