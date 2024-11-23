@@ -55,6 +55,27 @@ class BooksHTML extends HTMLView {
     }
 }
 
+class UsersHTML extends HTMLView {
+    protected function get(Request $request): string {
+        // Check if there are users
+        if (empty($this->data)) {
+            return '<h1>User List</h1><p>No users available.</p>';
+        }
+
+        // Generate HTML for the users array
+        $html = '<h1>' . htmlspecialchars($this->data['title'] ?? 'No Title') . '</h1><ul>';
+        foreach ($this->data['users'] as $user) {
+            $name = htmlspecialchars($user['name'] ?? 'Unknown Name');
+            $email = htmlspecialchars($user['email'] ?? 'Unknown Email');
+            $html .= "<li><strong>{$name}</strong> - {$email}</li>";
+        }
+        $html .= '</ul>';
+
+        return $html;
+    }
+}
+
+
 class BookView extends TemplateView {
     public function __construct(Renderer $renderer, array $data) {
         parent::__construct($renderer, 'books', $data); // 'books' is the template directory
@@ -94,14 +115,14 @@ class UsersJSONView extends JSONView {
         parent::__construct($data);
     }
 }
-$router->register('/api/books', new BooksJSONView());
-$router->register('/api/users', new UsersJSONView());
 
-// Register the routes
+//Register routes
 $router->register('/bookshtml', new BooksHTML($books));
-
+$router->register('/usershtml', new UsersHTML($users));
 $router->register('/userstemplate', new UserView($renderer, $users));
 $router->register('/bookstemplate', new BookView($renderer, $books));
+$router->register('/api/books', new BooksJSONView());
+$router->register('/api/users', new UsersJSONView());
 
 // Serve the request
 $router->serve();
