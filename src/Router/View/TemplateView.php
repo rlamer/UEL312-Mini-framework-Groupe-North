@@ -14,7 +14,7 @@ class TemplateView extends BaseView {
         $this->renderer = $renderer;
         $this->templateDirectory = $templateDirectory;
         $this->data = $data;
-
+  
         // Register the directory with the renderer
         $this->renderer->register($this->templateDirectory);
     }

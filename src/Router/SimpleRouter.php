@@ -72,6 +72,7 @@ class SimpleRouter implements Router {
         );
         $response->send();
     }
+    
 }
 
 ?>

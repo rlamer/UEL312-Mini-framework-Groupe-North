@@ -4,6 +4,7 @@ use Framework312\Router\SimpleRouter;
 use Framework312\Router\View\HTMLView;
 use Framework312\Router\View\TemplateView;
 use Framework312\Template\SimpleRenderer;
+use Framework312\Template\Renderer;
 use Symfony\Component\HttpFoundation\Request;
 
 // Autoload dependencies (assuming Composer is used)
@@ -20,6 +21,15 @@ $books = [
         ['id' => 1, 'title' => '1984', 'author' => 'George Orwell'],
         ['id' => 2, 'title' => 'To Kill a Mockingbird', 'author' => 'Harper Lee'],
         ['id' => 3, 'title' => 'Pride and Prejudice', 'author' => 'Jane Austen'],
+    ]
+];
+
+$users = [
+    'title' => 'User List',
+    'users' => [
+        ['id' => 1, 'name' => 'John Doe', 'email' => 'john.doe@example.com'],
+        ['id' => 2, 'name' => 'Jane Smith', 'email' => 'jane.smith@example.com'],
+        ['id' => 3, 'name' => 'Emily Johnson', 'email' => 'emily.johnson@example.com'],
     ]
 ];
 
@@ -44,11 +54,24 @@ class BooksHTML extends HTMLView {
     }
 }
 
-// Register the routes for both views
+class BookView extends TemplateView {
+    public function __construct(Renderer $renderer, array $data) {
+        parent::__construct($renderer, 'books', $data); // 'books' is the template directory
+    }
+}
+
+class UserView extends TemplateView {
+    public function __construct(Renderer $renderer, array $data) {
+        parent::__construct($renderer, 'users', $data); // 'users' is the template directory
+    }
+}
+
+
+// Register the routes
 $router->register('/bookshtml', new BooksHTML($books));
 
-// Register the /books route with TemplateView
-$router->register('/books', new TemplateView($renderer, 'books', $books));
+$router->register('/userstemplate', new UserView($renderer, $users));
+$router->register('/bookstemplate', new BookView($renderer, $books));
 
 // Serve the request
 $router->serve();
