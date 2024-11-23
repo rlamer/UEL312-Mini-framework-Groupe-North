@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($title ?? 'Book List') ?></title>
+    <title><?= htmlspecialchars($data['title'] ?? 'No Title') ?></title>
 </head>
 <body>
-    <h1><?= htmlspecialchars($title ?? 'Book List') ?></h1>
+    <h1><?= htmlspecialchars($data['title'] ?? 'No Title') ?></h1>
 
-    <?php if (!empty($books) && is_array($books)): ?>
+    <?php if (!empty($data['books']) && is_array($data['books'])): ?>
         <ul>
-            <?php foreach ($books as $book): ?>
+            <?php foreach ($data['books'] as $book): ?>
                 <li>
                     <strong>Title:</strong> <?= htmlspecialchars($book['title'] ?? 'Unknown Title') ?><br>
                     <strong>Author:</strong> <?= htmlspecialchars($book['author'] ?? 'Unknown Author') ?><br>
@@ -20,10 +20,6 @@
         </ul>
     <?php else: ?>
         <p>No books available to display.</p>
-    <?php endif; ?>
-
-    <?php if (!empty($message)): ?>
-        <p><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 </body>
 </html>

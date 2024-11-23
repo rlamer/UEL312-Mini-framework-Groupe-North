@@ -8,10 +8,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 //Handles HTTP requests and generates responses
 abstract class BaseView {
+    protected array $data = [];
     /*Protected methods: get, post, patch, put, delete
     If a child class does not override one of these methods and it is called, 
     an exception (HttpMethodNotImplemented) is thrown.
     */
+    public function __construct(array $data = []) {
+        $this->data = $data;
+    }
+
     protected function get(Request $request): mixed {
         throw new RouterException\HttpMethodNotImplemented(static::class, 'GET');
     }
