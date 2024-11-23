@@ -18,12 +18,9 @@ class SimpleRenderer implements Renderer {
         if (!$templateFile) {
             throw new \RuntimeException("Oops! Template '$template' not found.");
         }
-
-        if (is_array($data)) {
-            extract($data, EXTR_SKIP);
-        }
-
+        
         ob_start();
+        // Pass $data directly to the template
         include $templateFile;
         return ob_get_clean();
     }
@@ -39,12 +36,19 @@ class SimpleRenderer implements Renderer {
 
     private function findTemplate(string $template): ?string {
         foreach ($this->templatePaths as $path) {
-            $templateFile = "$path/$template";
+            $templateFile = "$path";
+    
+            // Check if the given template is a directory and default to index.php
+            if (is_dir($templateFile)) {
+                $templateFile .= '/index.php';
+            }
+    
             if (file_exists($templateFile)) {
                 return $templateFile;
             }
         }
-
+    
         return null;
     }
+    
 }
