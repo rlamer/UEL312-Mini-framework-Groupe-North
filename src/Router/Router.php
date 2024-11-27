@@ -10,31 +10,3 @@ interface Router {
     public function serve(mixed ...$args);
 }
 
-/*
-Example View:
-
-class BookView {
-    public function get($request) {
-        // Logic to retrieve and display a book
-        return ['title' => '1984', 'author' => 'George Orwell'];
-    }
-
-    public function post($request) {
-        // Logic to add a new book
-        return ['status' => 'success', 'message' => 'Book added'];
-    }
-}
-
-Register a route:
-
-$router = new SimpleRouter();
-
-// Register the route for viewing a book
-$router->register('/book/:id', BookView::class);
-
-Serve a request:
-$router->serve();   - calls the get method of BookView 
-
-
-**/
-
