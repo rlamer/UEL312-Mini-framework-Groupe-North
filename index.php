@@ -117,12 +117,12 @@ class UsersJSONView extends JSONView {
 }
 
 //Register routes
-$router->register('/bookshtml', new BooksHTML($books));
-$router->register('/usershtml', new UsersHTML($users));
-$router->register('/userstemplate', new UserView($renderer, $users));
-$router->register('/bookstemplate', new BookView($renderer, $books));
-$router->register('/api/books', new BooksJSONView());
-$router->register('/api/users', new UsersJSONView());
+$router->register('/bookshtmlmain', new BooksHTML($books));
+$router->register('/usershtmlmain', new UsersHTML($users));
+$router->register('/userstemplatemain', new UserView($renderer, $users));
+$router->register('/bookstemplatemain', new BookView($renderer, $books));
+$router->register('/api/booksmain', new BooksJSONView());
+$router->register('/api/usersmain', new UsersJSONView());
 
 // Serve the request
 $router->serve();
